@@ -1,0 +1,92 @@
+{
+  "expo": {
+    "name": "ExpoShareIntent Example",
+    "slug": "expo-share-intent-example",
+    "scheme": "exposhareintentexample",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "plugins": [
+      [
+        "@bacons/apple-targets",
+        {
+          "appleTeamId": "XXXXXXXXXX"
+        }
+      ],
+      [
+        "expo-share-intent",
+        {
+          "iosActivationRules": {
+            "NSExtensionActivationSupportsText": true,
+            "NSExtensionActivationSupportsWebURLWithMaxCount": 1,
+            "NSExtensionActivationSupportsWebPageWithMaxCount": 1,
+            "NSExtensionActivationSupportsImageWithMaxCount": 2,
+            "NSExtensionActivationSupportsMovieWithMaxCount": 1,
+            "NSExtensionActivationSupportsFileWithMaxCount": 1
+          },
+          "androidIntentFilters": ["text/*", "image/*", "video/*"],
+          "androidMultiIntentFilters": ["image/*"],
+          "disableIOS": false,
+          "disableAndroid": false
+        }
+      ],
+      ["expo-updates"],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static",
+            "deploymentTarget": "15.1"
+          }
+        }
+      ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "expo.modules.exposhareintent.example"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "expo.modules.exposhareintent.example"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7a5b9f0b-c450-4c48-9e89-be9b6d6a2e98",
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "bundleIdentifier": "group.expo.modules.exposhareintent.example.widgets",
+                  "targetName": "widgets",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.expo.modules.exposhareintent.example"
+                    ],
+                    "com.apple.developer.networking.wifi-info": true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/7a5b9f0b-c450-4c48-9e89-be9b6d6a2e98"
+    }
+  }
+}

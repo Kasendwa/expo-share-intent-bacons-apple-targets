@@ -1,0 +1,38 @@
+diff --git a/node_modules/@bacons/xcode/build/api/XCBuildConfiguration.js b/node_modules/@bacons/xcode/build/api/XCBuildConfiguration.js
+index d8b8f7e..c48e1e9 100644
+--- a/node_modules/@bacons/xcode/build/api/XCBuildConfiguration.js
++++ b/node_modules/@bacons/xcode/build/api/XCBuildConfiguration.js
+@@ -48,11 +48,23 @@ class XCBuildConfiguration extends AbstractObject_1.AbstractObject {
+     }
+     /** @returns the resolved absolute file path for the `INFOPLIST_FILE` build setting if it exists. `null` if the setting does not exist. */
+     resolveFilePath(key) {
+-        const fileRef = this.resolveBuildSetting(key);
++        let fileRef = this.resolveBuildSetting(key);
++
+         if (fileRef == null || typeof fileRef !== "string") {
+             return null;
+         }
+-        const root = this.getXcodeProject().getProjectRoot();
++        let root = this.getXcodeProject().getProjectRoot();
++
++        if (fileRef.includes(root)) {
++            root = "";
++        }  
++
++        if (fileRef.includes('/ios/')) {
++            root = fileRef.split('/ios/')[0] + '/ios';
++
++            fileRef = fileRef.split('/ios/')[1];
++        }
++
+         // TODO: Maybe interpolate
+         // TODO: Maybe add root projectRoot, currently this is always `""` in my fixtures.
+         return node_path_1.default.join(root, fileRef);
+@@ -75,6 +87,7 @@ class XCBuildConfiguration extends AbstractObject_1.AbstractObject {
+         const filePath = this.getInfoPlistFilePath();
+         if (!filePath)
+             return null;
++
+         return plist_1.default.parse(node_fs_1.default.readFileSync(filePath, "utf8"));
+     }
+     /** @returns a list of targets which refer to this build configuration. */

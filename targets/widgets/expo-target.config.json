@@ -1,0 +1,16 @@
+{
+  "type": "widget",
+  "colors": {
+    "textColor": "#FFFFFF",
+    "backgroundColor": {
+      "light": "#5A50FE",
+      "dark": "#1A1A1A"
+    }
+  },
+  "frameworks": ["SwiftUI"],
+  "entitlements": {
+    "com.apple.security.application-groups": [
+      "group.expo.modules.exposhareintent.example"
+    ]
+  }
+}
